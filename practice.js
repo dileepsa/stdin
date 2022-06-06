@@ -1,21 +1,15 @@
 const fs = require('fs');
+const { InputHandler } = require('./inputHandler.js');
 
 process.stdin.setEncoding('utf-8');
 
-const readInput = (cb) => {
-  let input = '';
-  let index = 0;
-  const details = ['name', 'DOB', 'hobbies'];
-  console.log('Please enter your', details[index]);
+const readInput = (inputHandler) => {
+  inputHandler.log();
   process.stdin.on('data', (chunk) => {
-    index++;
-    input += chunk;
-    if (index === 3) {
-      cb(input.split('\n'));
-      process.exit(0);
-    }
-    console.log('Please enter your', details[index]);
-  })
+    inputHandler.addInput(chunk);
+    inputHandler.decideInvokation();
+    inputHandler.log();
+  });
 };
 
 const toJson = (allInputs) => {
@@ -27,4 +21,9 @@ const toJson = (allInputs) => {
   fs.writeFileSync('details.json', JSON.stringify(obj), 'utf8');
 }
 
-readInput(toJson);
+const main = () => {
+  const inputHandler = new InputHandler(toJson);
+  readInput(inputHandler);
+}
+
+main();
