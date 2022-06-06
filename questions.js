@@ -2,6 +2,10 @@ const { isValidAddress, isValidDOB, isValidName, isValidPhNo, isValidHobbies } =
 
 const identity = (x) => x;
 
+const formatHobbies = (hobbies) => {
+  return hobbies.split(',');
+};
+
 const questions = [
   {
     name: 'name',
@@ -19,7 +23,7 @@ const questions = [
     name: 'hobbies',
     description: 'Enter your hobbies',
     validator: isValidHobbies,
-    formatter: identity
+    formatter: formatHobbies
   },
   {
     name: 'ph-no',
