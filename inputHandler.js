@@ -1,12 +1,9 @@
-const { isValidAddress, isValidDOB, isValidName, isValidPhNo, isValidHobbies } = require('./validations.js');
-
 class InputHandler {
-  constructor(cb) {
+  constructor(cb, questions) {
     this.cb = cb;
+    this.questions = questions;
     this.allInputs = '';
     this.index = 0;
-    this.validations = [isValidName, isValidDOB, isValidHobbies, isValidPhNo, isValidAddress, isValidAddress];
-    this.details = ['name', 'dob', 'hobbies', 'ph-no', 'address-1', 'address-2'];
   }
 
   addInput(data) {
@@ -14,29 +11,24 @@ class InputHandler {
     this.index++;
   }
 
-  log() {
-    console.log('Please enter your', this.details[this.index]);
+  toString() {
+    console.log(this.questions[this.index].description);
   }
 
-  invokeCallBack() {
-    this.cb(this.allInputs.split('\n'));
-  }
-
-  decideInvokation() {
-    if (this.index === this.validations.length) {
-      this.invokeCallBack();
+  areQuestionsOver() {
+    if (this.index === this.questions.length) {
+      this.cb(this.allInputs.split('\n'));
       process.exit(0);
     }
   }
 
   validate(input) {
-    const result = this.validations[this.index](input);
+    const result = this.questions[this.index].validator(input);
     if (result) {
       this.addInput(input);
     }
   };
 
 }
-
 
 exports.InputHandler = InputHandler;

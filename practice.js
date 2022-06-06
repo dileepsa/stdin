@@ -1,14 +1,15 @@
 const fs = require('fs');
 const { InputHandler } = require('./inputHandler.js');
+const { questions } = require('./questions.js')
 
 process.stdin.setEncoding('utf-8');
 
 const readInput = (inputHandler) => {
-  inputHandler.log();
+  inputHandler.toString();
   process.stdin.on('data', (chunk) => {
     inputHandler.validate(chunk);
-    inputHandler.decideInvokation();
-    inputHandler.log();
+    inputHandler.areQuestionsOver();
+    inputHandler.toString();
   });
 };
 
@@ -24,7 +25,7 @@ const toJson = (allInputs) => {
 }
 
 const main = () => {
-  const inputHandler = new InputHandler(toJson);
+  const inputHandler = new InputHandler(toJson, questions);
   readInput(inputHandler);
 }
 
