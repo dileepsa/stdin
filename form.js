@@ -8,7 +8,6 @@ class Form {
 
   addInput(data) {
     this.allInputs.push(data);
-    console.log(this.allInputs);
     this.index++;
   }
 
@@ -24,7 +23,7 @@ class Form {
     if (!result) {
       return;
     }
-    const formattedInput = this.questions[this.index].formatter(input.trim())
+    const formattedInput = this.questions[this.index].formatter(input.trim());
     this.addInput(formattedInput);
   };
 

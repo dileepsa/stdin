@@ -32,8 +32,14 @@ const questions = [
     formatter: identity
   },
   {
-    name: 'address',
-    description: 'Enter your address',
+    name: 'address-1',
+    description: 'Enter your address-1',
+    validator: isValidAddress,
+    formatter: identity
+  },
+  {
+    name: 'address-2',
+    description: 'Enter your address-2',
     validator: isValidAddress,
     formatter: identity
   }

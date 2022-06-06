@@ -1,17 +1,8 @@
 const fs = require('fs');
-const { Form } = require('./inputHandler.js');
+const { Form } = require('./form.js');
 const { questions } = require('./questions.js')
 
 process.stdin.setEncoding('utf-8');
-
-const readInput = (form) => {
-  form.displayQuestion();
-  process.stdin.on('data', (chunk) => {
-    form.validate(chunk);
-    form.areQuestionsOver();
-    form.displayQuestion();
-  });
-};
 
 const toJson = (allInputs) => {
   const obj = {
@@ -23,6 +14,15 @@ const toJson = (allInputs) => {
   }
   fs.writeFileSync('details.json', JSON.stringify(obj), 'utf8');
 }
+
+const readInput = (form) => {
+  form.displayQuestion();
+  process.stdin.on('data', (chunk) => {
+    form.validate(chunk);
+    form.areQuestionsOver();
+    form.displayQuestion();
+  });
+};
 
 const main = () => {
   const form = new Form(toJson, questions);
