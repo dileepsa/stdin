@@ -3,7 +3,7 @@ class InputHandler {
     this.cb = cb;
     this.allInputs = '';
     this.index = 0;
-    this.details = ['name', 'dob', 'hobbies', 'ph-no'];
+    this.details = ['name', 'dob', 'hobbies', 'ph-no', 'address-1', 'address-2'];
   }
 
   addInput(data) {
@@ -20,7 +20,7 @@ class InputHandler {
   }
 
   decideInvokation() {
-    if (this.index === 4) {
+    if (this.index === 6) {
       this.invokeCallBack();
       process.exit(0);
     }
@@ -52,9 +52,21 @@ class InputHandler {
       this.addInput(number);
     }
   }
+  validateAddress(address) {
+    if (address) {
+      this.addInput(address);
+    }
+  }
 
   validate(input) {
-    console.log(input);
+    if (this.index === 5) {
+      this.validateAddress(input);
+    }
+
+    if (this.index === 4) {
+      this.validateAddress(input);
+    }
+
     if (this.index === 3) {
       this.validatePhNo(input);
     }
@@ -73,5 +85,6 @@ class InputHandler {
   };
 
 }
+
 
 exports.InputHandler = InputHandler;

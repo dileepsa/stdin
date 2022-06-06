@@ -17,7 +17,8 @@ const toJson = (allInputs) => {
     name: allInputs[0],
     DOB: allInputs[1],
     hobbies: allInputs[2].split(','),
-    'ph-no': allInputs[3]
+    'ph-no': allInputs[3],
+    address: allInputs.slice(4).join('\n')
   }
   fs.writeFileSync('details.json', JSON.stringify(obj), 'utf8');
 }
