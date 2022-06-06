@@ -6,14 +6,15 @@ const readInput = (cb) => {
   let input = '';
   let index = 0;
   const details = ['name', 'DOB', 'hobbies'];
+  console.log('Please enter your', details[index]);
   process.stdin.on('data', (chunk) => {
-    console.log('Please enter your', details[index]);
-    input += chunk;
     index++;
-    if (index === 4) {
-      console.log(cb(input.split('\n')));
+    input += chunk;
+    if (index === 3) {
+      cb(input.split('\n'));
       process.exit(0);
     }
+    console.log('Please enter your', details[index]);
   })
 };
 
