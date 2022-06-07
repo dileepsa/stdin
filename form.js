@@ -1,6 +1,5 @@
 class Form {
-  constructor(cb, questions) {
-    this.cb = cb;
+  constructor(questions) {
     this.questions = questions;
     this.allInputs = [];
     this.index = 0;
@@ -12,15 +11,16 @@ class Form {
   }
 
   areQuestionsOver() {
-    if (this.index === this.questions.length) {
-      this.cb(this.allInputs);
-      process.exit(0);
-    }
+    return this.index === this.questions.length;
+  }
+
+  getAllInputs() {
+    return this.allInputs;
   }
 
   validate(input) {
-    const result = this.questions[this.index].validator(input);
-    if (!result) {
+    const valid = this.questions[this.index].validator(input);
+    if (!valid) {
       return;
     }
     const formattedInput = this.questions[this.index].formatter(input.trim());

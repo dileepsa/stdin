@@ -19,13 +19,17 @@ const readInput = (form) => {
   form.displayQuestion();
   process.stdin.on('data', (chunk) => {
     form.validate(chunk);
-    form.areQuestionsOver();
+    if (form.areQuestionsOver()) {
+      const allInputs = form.getAllInputs();
+      toJson(allInputs);
+      process.exit(0);
+    };
     form.displayQuestion();
   });
 };
 
 const main = () => {
-  const form = new Form(toJson, questions);
+  const form = new Form(questions);
   readInput(form);
 }
 
