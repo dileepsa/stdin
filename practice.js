@@ -12,20 +12,27 @@ const toJson = (allInputs) => {
     'ph-no': allInputs[3],
     address: allInputs.slice(4).join('\n')
   }
-  fs.writeFileSync('details.json', JSON.stringify(obj), 'utf8');
-}
+  return obj;
+};
 
 const readInput = (form) => {
   form.displayQuestion();
   process.stdin.on('data', (chunk) => {
     form.validate(chunk);
+
     if (form.areQuestionsOver()) {
-      const allInputs = form.getAllInputs();
-      toJson(allInputs);
-      process.exit(0);
+      process.stdin.emit('close');
     };
+
     form.displayQuestion();
   });
+
+  process.stdin.on('close', () => {
+    const allInputs = form.getAllInputs();
+    const details = toJson(allInputs);
+    fs.writeFileSync('details.json', JSON.stringify(details), 'utf8');
+    process.exit(0);
+  })
 };
 
 const main = () => {
