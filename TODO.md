@@ -1,11 +1,7 @@
 # Working
 
-
 # TODO
-  - [ ] Make src and test directories.
-  - [ ] Rename practice to `fillForm`.
   - [ ] Test the field and form.
-  - [ ] Ask the field whether it is filled or not.
   - [ ] Add Adress field.
   - [ ] Make form args private.
   - [ ] Test register Response.
@@ -13,3 +9,6 @@
   - [ ] Write equals for form and field.
 
 # Done
+  - [x] Ask the field whether it is filled or not.
+  - [x] Make src and test directories.
+  - [x] Rename practice to `fillForm`.

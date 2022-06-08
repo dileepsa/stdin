@@ -16,7 +16,7 @@ class Form {
   }
 
   isFilled() {
-    return this.#index === this.#fields.length;
+    return this.#fields.every((field) => field.isFilled());
   }
 
   getResponses() {

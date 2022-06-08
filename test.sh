@@ -19,7 +19,7 @@ function assert(){
 }
 
 function case1(){
-  prompts=$(node src/practice.js << EOF
+  prompts=$(node src/fillForm.js << EOF
 dileep
 2021-12-12
 playing,kabbadi

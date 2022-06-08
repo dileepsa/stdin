@@ -9,6 +9,7 @@ class Field {
     this.#prompt = prompt;
     this.#validator = validator;
     this.#formatter = formatter;
+    this.#response = null;
   }
 
   fillResponse(response) {
@@ -26,6 +27,10 @@ class Field {
 
   getEntry() {
     return { name: this.#name, response: this.#formatter(this.#response) };
+  }
+
+  isFilled() {
+    return this.#response !== null;
   }
 }
 
