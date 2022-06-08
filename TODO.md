@@ -1,12 +1,13 @@
 # Working
 
 # TODO
-  - [ ] Add Adress field.
   - [ ] Remove fs dependencie.
   - [ ] Write equals for form and field.
   - [ ] Add different cases in `main` tests.
 
 # Done
+  - [x] Change the main test by adding the address
+  - [x] Add Adress field.
   - [x] Test register Response.
   - [x] Use module.exports instead of exports.
   - [x] Remove log dependencies.

@@ -12,7 +12,9 @@ class Form {
     if (!filled) {
       return;
     }
-    this.#index++;
+    if (field.isFilled()) {
+      this.#index++;
+    }
   }
 
   isFilled() {

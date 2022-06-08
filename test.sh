@@ -24,10 +24,12 @@ dileep
 2021-12-12
 playing,kabbadi
 1234567890
+dileep
+annavarapu
 EOF
 )
-  expectedPrompts="Enter name Enter dob Enter hobbies Enter ph-no"
-  expected='{"name":"dileep","dob":"2021-12-12","hobbies":["playing","kabbadi"],"ph-no":"1234567890"}'
+  expectedPrompts="Enter name Enter dob Enter hobbies Enter ph-no Enter address-1 Enter address-2"
+  expected='{"name":"dileep","dob":"2021-12-12","hobbies":["playing","kabbadi"],"ph-no":"1234567890","address":"dileep\nannavarapu"}'
   actual=`cat 'details.json'`
   assert "${prompts[@]}" "${expectedPrompts}" "All prompts"
   assert "${actual}" "${expected}" "Details in json"
