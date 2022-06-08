@@ -1,22 +1,27 @@
 class Form {
+  #fields;
+  #index;
   constructor(...fileds) {
-    this.fields = fileds;
-    this.index = 0;
+    this.#fields = fileds;
+    this.#index = 0;
   }
 
   fillResponse(response) {
     const field = this.#getField();
-    field.fillResponse(response);
-    this.index++;
+    const filled = field.fillResponse(response);
+    if (!filled) {
+      return;
+    }
+    this.#index++;
   }
 
   isFilled() {
-    return this.index === this.fields.length;
+    return this.#index === this.#fields.length;
   }
 
   getResponses() {
     const responses = {};
-    this.fields.forEach((filed) => {
+    this.#fields.forEach((filed) => {
       const { name, response } = filed.getEntry();
       responses[name] = response;
     })
@@ -24,22 +29,11 @@ class Form {
   }
 
   #getField() {
-    return this.fields[this.index];
+    return this.#fields[this.#index];
   }
 
-  validate(input) {
-    const field = this.#getField();
-    const valid = field.validator(input);
-    if (!valid) {
-      return;
-    }
-
-    const formattedInput = field.formatter(input.trim());
-    this.fillResponse(formattedInput);
-  };
-
   getPrompt() {
-    return this.fields[this.index].getPrompt();
+    return this.#fields[this.#index].getPrompt();
   }
 }
 

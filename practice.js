@@ -10,21 +10,21 @@ const formatHobbies = (hobbies) => {
 process.stdin.setEncoding('utf-8');
 
 const registerResponse = (form, response) => {
-  form.validate(response);
+  form.fillResponse(response);
 
   if (form.isFilled()) {
-    const allInputs = form.getResponses();
-    fs.writeFileSync('details.json', JSON.stringify(allInputs), 'utf8');
+    const responses = form.getResponses();
+    fs.writeFileSync('details.json', JSON.stringify(responses), 'utf8');
     process.exit(0);
   };
 
   console.log(form.getPrompt());
 };
 
-const readInput = (form) => {
+const readResponse = (form) => {
   console.log(form.getPrompt());
   process.stdin.on('data', (response) => {
-    registerResponse(form, response);
+    registerResponse(form, response.trim());
   });
 };
 
@@ -38,7 +38,7 @@ const createForm = () => {
 
 const main = () => {
   const form = createForm();
-  readInput(form);
+  readResponse(form);
 }
 
 main();
