@@ -9,24 +9,27 @@ const formatHobbies = (hobbies) => {
 
 process.stdin.setEncoding('utf-8');
 
-const registerResponse = (form, response) => {
+const registerResponse = (form, response, logger) => {
   form.fillResponse(response);
 
   if (form.isFilled()) {
     const responses = form.getResponses();
     fs.writeFileSync('details.json', JSON.stringify(responses), 'utf8');
-    process.exit(0);
+    process.stdin.destroy(0);
+    return;
   };
 
-  console.log(form.getPrompt());
+  logger(form.getPrompt());
 };
 
-const readResponse = (form) => {
+const getLines = content => content.trim().split('\n');
+
+const readResponse = (form, logger) => {
   console.log(form.getPrompt());
   process.stdin.on('data', (response) => {
-    const responses = response.trim().split('\n');
+    const responses = getLines(response);
     responses.forEach((response) => {
-      registerResponse(form, response.trim());
+      registerResponse(form, response.trim(), logger);
     });
   });
 };
@@ -39,9 +42,4 @@ const createForm = () => {
   return new Form(nameField, dobField, hobbiesField, phnoField);
 };
 
-const main = () => {
-  const form = createForm();
-  readResponse(form);
-}
-
-main();
+module.exports = { registerResponse, createForm, readResponse }

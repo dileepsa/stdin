@@ -37,4 +37,4 @@ class Form {
   }
 }
 
-exports.Form = Form;
+module.exports = { Form }

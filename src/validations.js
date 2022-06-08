@@ -12,7 +12,4 @@ const isNotEmpty = (text) => text !== '';
 
 const isValidPhNo = (number) => number.trim().length === 10;
 
-exports.isValidName = isValidName;
-exports.isValidDOB = isValidDOB;
-exports.isNotEmpty = isNotEmpty;
-exports.isValidPhNo = isValidPhNo;
+module.exports = { isValidName, isValidDOB, isNotEmpty, isValidPhNo };
