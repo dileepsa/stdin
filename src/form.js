@@ -33,7 +33,7 @@ class Form {
   }
 
   getPrompt() {
-    return this.#fields[this.#index].getPrompt();
+    return this.#getField().getPrompt();
   }
 }
 
