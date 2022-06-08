@@ -1,5 +1,5 @@
 class Form {
-  constructor(fileds) {
+  constructor(...fileds) {
     this.fields = fileds;
     this.responses = {};
     this.index = 0;
@@ -32,7 +32,7 @@ class Form {
   };
 
   displayQuestion() {
-    console.log(this.fields[this.index].description);
+    console.log(this.fields[this.index].prompt);
   }
 
 }
