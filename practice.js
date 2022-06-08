@@ -24,7 +24,10 @@ const registerResponse = (form, response) => {
 const readResponse = (form) => {
   console.log(form.getPrompt());
   process.stdin.on('data', (response) => {
-    registerResponse(form, response.trim());
+    const responses = response.trim().split('\n');
+    responses.forEach((response) => {
+      registerResponse(form, response.trim());
+    });
   });
 };
 
