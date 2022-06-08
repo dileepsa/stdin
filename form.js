@@ -34,7 +34,6 @@ class Form {
   displayQuestion() {
     console.log(this.fields[this.index].prompt);
   }
-
 }
 
 exports.Form = Form;

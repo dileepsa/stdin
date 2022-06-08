@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { Form } = require('./form.js');
-const { Field } = require('./questions.js')
+const { Field } = require('./field.js')
 const { isValidDOB, isValidName, isValidPhNo, isNotEmpty } = require('./validations.js');
 
 const formatHobbies = (hobbies) => {
@@ -9,23 +9,23 @@ const formatHobbies = (hobbies) => {
 
 process.stdin.setEncoding('utf-8');
 
-const readInput = (form) => {
-  form.displayQuestion();
-  process.stdin.on('data', (chunk) => {
-    form.validate(chunk);
+const registerResponse = (form, response) => {
+  form.validate(response);
 
-    if (form.areQuestionsOver()) {
-      process.stdin.emit('close');
-    };
-
-    form.displayQuestion();
-  });
-
-  process.stdin.on('close', () => {
+  if (form.areQuestionsOver()) {
     const allInputs = form.getAllInputs();
     fs.writeFileSync('details.json', JSON.stringify(allInputs), 'utf8');
     process.exit(0);
-  })
+  };
+
+  form.displayQuestion();
+};
+
+const readInput = (form) => {
+  form.displayQuestion();
+  process.stdin.on('data', (response) => {
+    registerResponse(form, response);
+  });
 };
 
 const createForm = () => {
