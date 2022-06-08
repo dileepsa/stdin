@@ -12,17 +12,17 @@ process.stdin.setEncoding('utf-8');
 const registerResponse = (form, response) => {
   form.validate(response);
 
-  if (form.areQuestionsOver()) {
-    const allInputs = form.getAllInputs();
+  if (form.isFilled()) {
+    const allInputs = form.getResponses();
     fs.writeFileSync('details.json', JSON.stringify(allInputs), 'utf8');
     process.exit(0);
   };
 
-  form.displayQuestion();
+  console.log(form.getPrompt());
 };
 
 const readInput = (form) => {
-  form.displayQuestion();
+  console.log(form.getPrompt());
   process.stdin.on('data', (response) => {
     registerResponse(form, response);
   });

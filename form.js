@@ -1,38 +1,45 @@
 class Form {
   constructor(...fileds) {
     this.fields = fileds;
-    this.responses = {};
     this.index = 0;
   }
 
-  addInput(data) {
-    const question = this.fields[this.index];
-    this.responses[question.name] = data;
-    console.log(this.responses);
+  fillResponse(response) {
+    const field = this.#getField();
+    field.fillResponse(response);
     this.index++;
   }
 
-  areQuestionsOver() {
+  isFilled() {
     return this.index === this.fields.length;
   }
 
-  getAllInputs() {
-    return this.responses;
+  getResponses() {
+    const responses = {};
+    this.fields.forEach((filed) => {
+      const { name, response } = filed.getEntry();
+      responses[name] = response;
+    })
+    return responses;
+  }
+
+  #getField() {
+    return this.fields[this.index];
   }
 
   validate(input) {
-    const question = this.fields[this.index];
-    const valid = question.validator(input);
+    const field = this.#getField();
+    const valid = field.validator(input);
     if (!valid) {
       return;
     }
 
-    const formattedInput = question.formatter(input.trim());
-    this.addInput(formattedInput);
+    const formattedInput = field.formatter(input.trim());
+    this.fillResponse(formattedInput);
   };
 
-  displayQuestion() {
-    console.log(this.fields[this.index].prompt);
+  getPrompt() {
+    return this.fields[this.index].getPrompt();
   }
 }
 
