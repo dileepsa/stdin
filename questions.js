@@ -1,6 +1,10 @@
-const { isValidAddress, isValidDOB, isValidName, isValidPhNo, isValidHobbies } = require('./validations.js');
+const { isValidDOB, isValidName, isValidPhNo, isNotEmpty } = require('./validations.js');
 
 const identity = (x) => x;
+
+const formatAddress = (address2 = '', address1 = '') => {
+  return `${address1}\n${address2}`;
+};
 
 const formatHobbies = (hobbies) => {
   return hobbies.split(',');
@@ -22,7 +26,7 @@ const questions = [
   {
     name: 'hobbies',
     description: 'Enter your hobbies',
-    validator: isValidHobbies,
+    validator: isNotEmpty,
     formatter: formatHobbies
   },
   {
@@ -32,16 +36,16 @@ const questions = [
     formatter: identity
   },
   {
-    name: 'address-1',
+    name: 'address',
     description: 'Enter your address-1',
-    validator: isValidAddress,
+    validator: isNotEmpty,
     formatter: identity
   },
   {
-    name: 'address-2',
+    name: 'address',
     description: 'Enter your address-2',
-    validator: isValidAddress,
-    formatter: identity
+    validator: isNotEmpty,
+    formatter: formatAddress
   }
 ]
 
