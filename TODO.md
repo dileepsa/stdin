@@ -3,10 +3,10 @@
 # TODO
   - [ ] Remove fs dependencie.
   - [ ] Write equals for form and field.
-  - [ ] Test multilineField class.
-  - [ ] Rename test to `runFillForm`.
   
 # Done
+  - [x] Rename test to `runFillForm`.
+  - [x] Test multilineField class.
   - [x] Add different cases in `main` tests.
   - [x] Change the main test by adding the address
   - [x] Add Adress field.
