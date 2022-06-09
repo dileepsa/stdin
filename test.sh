@@ -1,4 +1,7 @@
-#!/bin/bash
+#! /bin/bash
+
+PASSED='✅'
+FAILED='❌'
 
 function assert(){
   local actual=$1
@@ -10,15 +13,15 @@ function assert(){
 
   diff /tmp/_actual.txt /tmp/_expected.txt > /dev/null
   code=$?
-  status='Failed'  
+  status=${FAILED}  
   if [ ${code} -eq 0 ]
   then
-    status='Passed'  
+    status=${PASSED}  
   fi
   echo "${status} - ${description}"
 }
 
-function case1(){
+function all_prompts(){
   prompts=$(node main.js << EOF
 dileep
 2021-12-12
@@ -35,4 +38,24 @@ EOF
   assert "${actual}" "${expected}" "Details in json"
 }
 
-case1
+all_prompts
+
+function repeat_name_prompt(){
+  prompts=$(node main.js << EOF
+dil
+jhonson
+2021-12-12
+playing,kabbadi
+1234567890
+rammandir
+cholepur
+EOF
+)
+  expectedPrompts="Enter name Enter name Enter dob Enter hobbies Enter ph-no Enter address-1 Enter address-2"
+  expected='{"name":"jhonson","dob":"2021-12-12","hobbies":["playing","kabbadi"],"ph-no":"1234567890","address":"rammandir\ncholepur"}'
+  actual=`cat 'details.json'`
+  assert "${prompts[@]}" "${expectedPrompts}" "Repeat name prompt once"
+  assert "${actual}" "${expected}" "Different Details in json"
+}
+
+repeat_name_prompt
