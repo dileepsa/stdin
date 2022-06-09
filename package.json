@@ -1,0 +1,25 @@
+{
+  "name": "stdin",
+  "version": "1.0.0",
+  "description": "Created a form using stdn",
+  "main": "fillForm.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dileepsa/stdin.git"
+  },
+  "author": "Dileep Annavarapu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dileepsa/stdin/issues"
+  },
+  "homepage": "https://github.com/dileepsa/stdin#readme",
+  "devDependencies": {
+    "mocha": "^10.0.0"
+  }
+}
