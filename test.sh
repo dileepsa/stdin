@@ -38,8 +38,6 @@ EOF
   assert "${actual}" "${expected}" "Details in json"
 }
 
-all_prompts
-
 function repeat_name_prompt(){
   prompts=$(node main.js << EOF
 dil
@@ -58,4 +56,30 @@ EOF
   assert "${actual}" "${expected}" "Different Details in json"
 }
 
-repeat_name_prompt
+function repeat_ph_no_prompt(){
+ prompts=$(node main.js << EOF
+jhonson
+2021-12-12
+playing,kabbadi
+123
+1234
+1234567890
+rammandir
+cholepur
+EOF
+)
+  expectedPrompts="Enter name Enter dob Enter hobbies Enter ph-no Enter ph-no Enter ph-no Enter address-1 Enter address-2"
+  expected='{"name":"jhonson","dob":"2021-12-12","hobbies":["playing","kabbadi"],"ph-no":"1234567890","address":"rammandir\ncholepur"}'
+  actual=`cat 'details.json'`
+  assert "${prompts[@]}" "${expectedPrompts}" "Repeat phone number prompt two times"
+  assert "${actual}" "${expected}" "Different Details in json"
+}
+
+
+function run_tests(){
+  all_prompts
+  repeat_name_prompt
+  repeat_ph_no_prompt
+}
+
+run_tests
